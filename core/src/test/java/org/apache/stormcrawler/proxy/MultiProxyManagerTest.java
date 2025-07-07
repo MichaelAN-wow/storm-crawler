@@ -54,7 +54,8 @@ class MultiProxyManagerTest {
             "http://example.com:80",
             "sock5://example.com:64000"
         };
-        FileWriter writer = new FileWriter("/tmp/proxies.txt", StandardCharsets.UTF_8);
+        String fileName = Files.createTempFile("proxies", "txt").toString();
+        FileWriter writer = new FileWriter(fileName, StandardCharsets.UTF_8);
         for (String proxyString : proxyStrings) {
             writer.write("# fake comment to test" + "\n");
             writer.write("// fake comment to test" + "\n");
@@ -64,12 +65,12 @@ class MultiProxyManagerTest {
         }
         writer.close();
         Config config = new Config();
-        config.put("http.proxy.file", "/tmp/proxies.txt");
+        config.put("http.proxy.file", fileName);
         config.put("http.proxy.rotation", "ROUND_ROBIN");
         MultiProxyManager pm = new MultiProxyManager();
         pm.configure(config);
         Assertions.assertEquals(pm.proxyCount(), proxyStrings.length);
-        Files.deleteIfExists(Paths.get("/tmp/proxies.txt"));
+        Files.deleteIfExists(Paths.get(fileName));
     }
 
     @Test
@@ -148,9 +149,9 @@ class MultiProxyManagerTest {
         Assertions.assertNotEquals(proxy2.toString(), proxy3.toString());
         Assertions.assertNotEquals(proxy3.toString(), proxy1.toString());
         Assertions.assertNotEquals(proxy3.toString(), proxy2.toString());
-        Assertions.assertEquals(proxy1.getUsage(), 1);
-        Assertions.assertEquals(proxy2.getUsage(), 1);
-        Assertions.assertEquals(proxy3.getUsage(), 1);
+        Assertions.assertEquals(1, proxy1.getUsage());
+        Assertions.assertEquals(1, proxy2.getUsage());
+        Assertions.assertEquals(1, proxy3.getUsage());
         for (int i = 0; i < 3; i++) {
             pm.getProxy(null);
         }
@@ -163,9 +164,9 @@ class MultiProxyManagerTest {
         Assertions.assertNotEquals(proxy5.toString(), proxy6.toString());
         Assertions.assertNotEquals(proxy6.toString(), proxy4.toString());
         Assertions.assertNotEquals(proxy6.toString(), proxy5.toString());
-        Assertions.assertEquals(proxy4.getUsage(), 2);
-        Assertions.assertEquals(proxy5.getUsage(), 2);
-        Assertions.assertEquals(proxy6.getUsage(), 2);
+        Assertions.assertEquals(2, proxy4.getUsage());
+        Assertions.assertEquals(2, proxy5.getUsage());
+        Assertions.assertEquals(2, proxy6.getUsage());
         Assertions.assertEquals(proxy1.toString(), proxy4.toString());
         Assertions.assertEquals(proxy2.toString(), proxy5.toString());
         Assertions.assertEquals(proxy3.toString(), proxy6.toString());
