@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -89,7 +90,7 @@ public class Metadata {
      * @return the first value for the key or null if it does not exist *
      */
     public String getFirstValue(String key) {
-        String[] values = md.get(key);
+        String[] values = getValues(key);
         if (values == null) return null;
         if (values.length == 0) return null;
         return values[0];
@@ -109,14 +110,15 @@ public class Metadata {
     }
 
     public String[] getValues(String key) {
-        String[] values = md.get(key);
+        if (key == null || key.isEmpty()) return null;
+        String[] values = md.getOrDefault(key, md.get(key.toLowerCase(Locale.ROOT)));
         if (values == null) return null;
         if (values.length == 0) return null;
         return values;
     }
 
     public boolean containsKey(String key) {
-        return md.containsKey(key);
+        return md.containsKey(key) || md.containsKey(key.toLowerCase(Locale.ROOT));
     }
 
     public boolean containsKeyWithValue(String key, String value) {
