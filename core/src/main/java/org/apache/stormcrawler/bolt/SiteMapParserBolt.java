@@ -328,8 +328,7 @@ public class SiteMapParserBolt extends StatusEmitterBolt {
 
                         if (entry.getValue() != null) {
                             metadata.addValues(
-                                    extension.name() + "." + entry.getKey(),
-                                    Arrays.asList(entry.getValue()));
+                                    extension.name() + "." + entry.getKey(), entry.getValue());
                         }
                     }
                 }

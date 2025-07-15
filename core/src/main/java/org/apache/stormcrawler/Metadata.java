@@ -19,7 +19,6 @@ package org.apache.stormcrawler;
 import com.esotericsoftware.kryo.serializers.DefaultArraySerializers.StringArraySerializer;
 import com.esotericsoftware.kryo.serializers.DefaultSerializers.StringSerializer;
 import com.esotericsoftware.kryo.serializers.MapSerializer.BindMap;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
@@ -162,21 +161,21 @@ public class Metadata {
         md.put(key, newvals);
     }
 
-    public void addValues(String key, Collection<String> values) {
+    public void addValues(String key, String[] values) {
         checkLockException();
 
-        if (values == null || values.size() == 0) return;
-        String[] existingvals = md.get(key);
-        if (existingvals == null) {
-            md.put(key, values.toArray(new String[0]));
+        if (values == null || values.length == 0) return;
+        if (!md.containsKey(key)) {
+            md.put(key, values);
             return;
         }
+        for (String value : values) {
+            addValue(key, value);
+        }
+    }
 
-        ArrayList<String> existing = new ArrayList<>(existingvals.length + values.size());
-        Collections.addAll(existing, existingvals);
-
-        existing.addAll(values);
-        md.put(key, existing.toArray(new String[0]));
+    public void addValues(String key, Collection<String> values) {
+        addValues(key, values.toArray(new String[0]));
     }
 
     /**
