@@ -159,9 +159,9 @@ class JSoupParserBoltTest extends ParsingTester {
                 Boolean.parseBoolean(metadata.getFirstValue(RobotsTags.ROBOTS_NO_FOLLOW));
         boolean isNoCache =
                 Boolean.parseBoolean(metadata.getFirstValue(RobotsTags.ROBOTS_NO_CACHE));
-        Assertions.assertEquals(true, isNoIndex, "incorrect noIndex");
-        Assertions.assertEquals(true, isNoFollow, "incorrect noFollow");
-        Assertions.assertEquals(false, isNoCache, "incorrect noCache");
+        Assertions.assertTrue(isNoIndex, "incorrect noIndex");
+        Assertions.assertTrue(isNoFollow, "incorrect noFollow");
+        Assertions.assertFalse(isNoCache, "incorrect noCache");
     }
 
     @Test

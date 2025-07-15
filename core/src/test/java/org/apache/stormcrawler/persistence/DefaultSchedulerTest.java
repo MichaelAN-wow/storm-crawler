@@ -92,7 +92,7 @@ class DefaultSchedulerTest {
         scheduler.init(stormConf);
         Metadata metadata = new Metadata();
         Optional<Date> nextFetch = scheduler.schedule(Status.ERROR, metadata);
-        Assertions.assertEquals(false, nextFetch.isPresent());
+        Assertions.assertFalse(nextFetch.isPresent());
     }
 
     @Test
@@ -104,6 +104,6 @@ class DefaultSchedulerTest {
         Metadata metadata = new Metadata();
         metadata.setValue("isSpam", "true");
         Optional<Date> nextFetch = scheduler.schedule(Status.FETCHED, metadata);
-        Assertions.assertEquals(false, nextFetch.isPresent());
+        Assertions.assertFalse(nextFetch.isPresent());
     }
 }

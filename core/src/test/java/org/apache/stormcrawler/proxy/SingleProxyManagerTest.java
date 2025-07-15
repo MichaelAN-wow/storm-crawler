@@ -36,11 +36,11 @@ class SingleProxyManagerTest {
         Optional<SCProxy> proxyOptional = pm.getProxy(null);
         Assertions.assertTrue(proxyOptional.isPresent());
         SCProxy proxy = proxyOptional.get();
-        Assertions.assertEquals(proxy.getProtocol(), "http");
-        Assertions.assertEquals(proxy.getAddress(), "example.com");
-        Assertions.assertEquals(proxy.getPort(), "8080");
-        Assertions.assertEquals(proxy.getUsername(), "user1");
-        Assertions.assertEquals(proxy.getPassword(), "pass1");
-        Assertions.assertEquals(proxy.toString(), "http://user1:pass1@example.com:8080");
+        Assertions.assertEquals("http", proxy.getProtocol());
+        Assertions.assertEquals("example.com", proxy.getAddress());
+        Assertions.assertEquals("8080", proxy.getPort());
+        Assertions.assertEquals("user1", proxy.getUsername());
+        Assertions.assertEquals("pass1", proxy.getPassword());
+        Assertions.assertEquals("http://user1:pass1@example.com:8080", proxy.toString());
     }
 }

@@ -54,7 +54,7 @@ class MetadataFilterTest {
         Metadata metadata = new Metadata();
         metadata.addValue("key", "val");
         String filterResult = filter.filter(url, metadata, url.toExternalForm());
-        Assertions.assertEquals(null, filterResult);
+        Assertions.assertNull(filterResult);
     }
 
     @Test

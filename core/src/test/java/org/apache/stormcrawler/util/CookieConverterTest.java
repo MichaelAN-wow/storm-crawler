@@ -284,25 +284,25 @@ class CookieConverterTest {
     @Test
     void testDomainsChecker() {
         boolean result = CookieConverter.checkDomainMatchToUrl(".example.com", "www.example.com");
-        Assertions.assertEquals(true, result, "domain is valid");
+        Assertions.assertTrue(result, "domain is valid");
     }
 
     @Test
     void testDomainsChecker2() {
         boolean result = CookieConverter.checkDomainMatchToUrl(".example.com", "example.com");
-        Assertions.assertEquals(true, result, "domain is valid");
+        Assertions.assertTrue(result, "domain is valid");
     }
 
     @Test
     void testDomainsChecker3() {
         boolean result = CookieConverter.checkDomainMatchToUrl("example.com", "www.example.com");
-        Assertions.assertEquals(true, result, "domain is valid");
+        Assertions.assertTrue(result, "domain is valid");
     }
 
     @Test
     void testDomainsChecker4() {
         boolean result = CookieConverter.checkDomainMatchToUrl("example.com", "anotherexample.com");
-        Assertions.assertEquals(false, result, "domain is not valid");
+        Assertions.assertFalse(result, "domain is not valid");
     }
 
     private URL getUrl(String urlString) {

@@ -41,24 +41,24 @@ class DelegationProtocolTest {
         Metadata meta = new Metadata();
         meta.setValue("js", "true");
         FilteredProtocol pf = superProto.getProtocolFor("https://stormcrawler.apache.org", meta);
-        Assertions.assertEquals(pf.id, "second");
+        Assertions.assertEquals("second", pf.id);
         // no filter at all
         meta = new Metadata();
         pf = superProto.getProtocolFor("https://www.example.com/robots.txt", meta);
-        Assertions.assertEquals(pf.id, "default");
+        Assertions.assertEquals("default", pf.id);
         // should match the last instance
         // as the one above has more than one filter
         meta = new Metadata();
         meta.setValue("domain", "example.com");
         pf = superProto.getProtocolFor("https://example.com", meta);
-        Assertions.assertEquals(pf.id, "default");
+        Assertions.assertEquals("default", pf.id);
         // everything should match
         meta = new Metadata();
         meta.setValue("test", "true");
         meta.setValue("depth", "3");
         meta.setValue("domain", "example.com");
         pf = superProto.getProtocolFor("https://www.example-two.com", meta);
-        Assertions.assertEquals(pf.id, "first");
+        Assertions.assertEquals("first", pf.id);
         // should not match
         meta = new Metadata();
         meta.setValue("test", "false");
@@ -72,8 +72,8 @@ class DelegationProtocolTest {
         // URLs
         meta = new Metadata();
         pf = superProto.getProtocolFor("https://www.example-two.com/large.pdf", meta);
-        Assertions.assertEquals(pf.id, "fourth");
+        Assertions.assertEquals("fourth", pf.id);
         pf = superProto.getProtocolFor("https://www.example-two.com/large.doc", meta);
-        Assertions.assertEquals(pf.id, "fourth");
+        Assertions.assertEquals("fourth", pf.id);
     }
 }

@@ -47,7 +47,7 @@ class SCProxyTest {
         };
         for (int i = 0; i < valid_inputs.length; i++) {
             SCProxy proxy = new SCProxy(valid_inputs[i]);
-            Assertions.assertEquals(proxy.getUsage(), 0);
+            Assertions.assertEquals(0, proxy.getUsage());
             Assertions.assertEquals(proxy.getProtocol(), valid_outputs[i][0]);
             Assertions.assertEquals(proxy.getUsername(), valid_outputs[i][1]);
             Assertions.assertEquals(proxy.getPassword(), valid_outputs[i][2]);
@@ -84,8 +84,8 @@ class SCProxyTest {
     @Test
     void testIncrementUsage() {
         SCProxy proxy = new SCProxy("http://user1:pass1@example.com:8080");
-        Assertions.assertEquals(proxy.getUsage(), 0);
+        Assertions.assertEquals(0, proxy.getUsage());
         proxy.incrementUsage();
-        Assertions.assertEquals(proxy.getUsage(), 1);
+        Assertions.assertEquals(1, proxy.getUsage());
     }
 }

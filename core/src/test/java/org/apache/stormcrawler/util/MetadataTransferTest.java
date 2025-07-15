@@ -63,7 +63,7 @@ class MetadataTransferTest {
         } catch (Exception e) {
             hasThrownException = true;
         }
-        Assertions.assertEquals(true, hasThrownException);
+        Assertions.assertTrue(hasThrownException);
         conf = new HashMap<>();
         conf.put(
                 MetadataTransfer.metadataTransferClassParamName,
@@ -74,7 +74,7 @@ class MetadataTransferTest {
         } catch (Exception e) {
             hasThrownException = true;
         }
-        Assertions.assertEquals(false, hasThrownException);
+        Assertions.assertFalse(hasThrownException);
     }
 
     @Test

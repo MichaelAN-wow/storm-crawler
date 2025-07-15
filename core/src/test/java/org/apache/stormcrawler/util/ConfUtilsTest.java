@@ -19,6 +19,7 @@ package org.apache.stormcrawler.util;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Map;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class ConfUtilsTest {
@@ -42,11 +43,11 @@ class ConfUtilsTest {
         conf.put("prefix.suffix", true);
         conf.put("prefix.optional.suffix", false);
         boolean res = ConfUtils.getBoolean(conf, "prefix.", "optional.", "suffix", true);
-        org.junit.jupiter.api.Assertions.assertEquals(false, res);
+        Assertions.assertFalse(res);
         res = ConfUtils.getBoolean(conf, "prefix.", "missing.", "suffix", false);
-        org.junit.jupiter.api.Assertions.assertEquals(true, res);
+        Assertions.assertTrue(res);
         res = ConfUtils.getBoolean(conf, "totally.", "missing.", "inAction", false);
-        org.junit.jupiter.api.Assertions.assertEquals(false, res);
+        Assertions.assertFalse(res);
     }
 
     @Test
@@ -55,12 +56,12 @@ class ConfUtilsTest {
         conf.put("prefix.suffix", "backup");
         conf.put("prefix.optional.suffix", "specific");
         String res = ConfUtils.getString(conf, "prefix.", "optional.", "suffix");
-        org.junit.jupiter.api.Assertions.assertEquals("specific", res);
+        Assertions.assertEquals("specific", res);
         res = ConfUtils.getString(conf, "prefix.", "missing.", "suffix");
-        org.junit.jupiter.api.Assertions.assertEquals("backup", res);
+        Assertions.assertEquals("backup", res);
         res = ConfUtils.getString(conf, "totally.", "missing.", "inAction", null);
-        org.junit.jupiter.api.Assertions.assertEquals(null, res);
+        Assertions.assertNull(res);
         res = ConfUtils.getString(conf, "totally.", "missing.", "inAction");
-        org.junit.jupiter.api.Assertions.assertEquals(null, res);
+        Assertions.assertNull(res);
     }
 }

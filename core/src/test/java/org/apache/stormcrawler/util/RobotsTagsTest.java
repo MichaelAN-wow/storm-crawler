@@ -27,27 +27,27 @@ class RobotsTagsTest {
     void testHTTPHeaders() throws MalformedURLException {
         Metadata md = new Metadata();
         RobotsTags tags = new RobotsTags(md, "");
-        Assertions.assertEquals(false, tags.isNoCache());
-        Assertions.assertEquals(false, tags.isNoFollow());
-        Assertions.assertEquals(false, tags.isNoIndex());
+        Assertions.assertFalse(tags.isNoCache());
+        Assertions.assertFalse(tags.isNoFollow());
+        Assertions.assertFalse(tags.isNoIndex());
         md = new Metadata();
         md.setValue("X-Robots-Tag", "none");
         tags = new RobotsTags(md, "");
-        Assertions.assertEquals(true, tags.isNoCache());
-        Assertions.assertEquals(true, tags.isNoFollow());
-        Assertions.assertEquals(true, tags.isNoIndex());
+        Assertions.assertTrue(tags.isNoCache());
+        Assertions.assertTrue(tags.isNoFollow());
+        Assertions.assertTrue(tags.isNoIndex());
         md = new Metadata();
         md.setValues("X-Robots-Tag", new String[] {"noindex", "nofollow"});
         tags = new RobotsTags(md, "");
-        Assertions.assertEquals(false, tags.isNoCache());
-        Assertions.assertEquals(true, tags.isNoFollow());
-        Assertions.assertEquals(true, tags.isNoIndex());
+        Assertions.assertFalse(tags.isNoCache());
+        Assertions.assertTrue(tags.isNoFollow());
+        Assertions.assertTrue(tags.isNoIndex());
         // expect the content to be incorrect
         md = new Metadata();
         md.setValue("X-Robots-Tag", "noindex, nofollow");
         tags = new RobotsTags(md, "");
-        Assertions.assertEquals(false, tags.isNoCache());
-        Assertions.assertEquals(true, tags.isNoFollow());
-        Assertions.assertEquals(true, tags.isNoIndex());
+        Assertions.assertFalse(tags.isNoCache());
+        Assertions.assertTrue(tags.isNoFollow());
+        Assertions.assertTrue(tags.isNoIndex());
     }
 }

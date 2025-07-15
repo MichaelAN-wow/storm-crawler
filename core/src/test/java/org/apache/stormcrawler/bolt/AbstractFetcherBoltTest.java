@@ -64,7 +64,7 @@ abstract class AbstractFetcherBoltTest {
         boolean acked = output.getAckedTuples().contains(tuple);
         boolean failed = output.getAckedTuples().contains(tuple);
         // should be acked or failed
-        Assertions.assertEquals(true, acked || failed);
+        Assertions.assertTrue(acked || failed);
         List<List<Object>> statusTuples = output.getEmitted(Constants.StatusStreamName);
         // we should get one tuple on the status stream
         // to notify that the URL is an error
@@ -93,7 +93,7 @@ abstract class AbstractFetcherBoltTest {
         boolean acked = output.getAckedTuples().contains(tuple);
         boolean failed = output.getFailedTuples().contains(tuple);
         // should be acked or failed
-        Assertions.assertEquals(true, acked || failed);
+        Assertions.assertTrue(acked || failed);
         List<List<Object>> statusTuples = output.getEmitted(Constants.StatusStreamName);
         // we should get one tuple on the status stream
         // to notify that the URL has been fetched
