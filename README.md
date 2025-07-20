@@ -1,4 +1,3 @@
----
 # Personal Fork Notice
 
 **Michael Noonan** (michaelan.modern@gmail.com) — Personal Fork for Portfolio
