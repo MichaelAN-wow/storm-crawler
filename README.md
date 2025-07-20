@@ -1,3 +1,16 @@
+---
+# Personal Fork Notice
+
+**Michael Noonan** (michaelan.modern@gmail.com) — Personal Fork for Portfolio
+
+This repository is a **personal fork of Apache StormCrawler** to showcase my 10 years of professional Java development experience.
+
+- The commit history has been rewritten under my authorship.
+- This fork is used for learning, demonstration, and portfolio purposes.
+- For official project documentation, please see the original content below.
+
+---
+
 [![StormCrawler](https://stormcrawler.apache.org/img/Logo-small.jpg)](https://stormcrawler.apache.org/)
 =============
 
